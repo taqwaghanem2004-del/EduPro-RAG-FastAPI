@@ -1,3 +1,30 @@
+# EduPro RAG Service (FastAPI)
+
+AI service for **EduPro**, my graduation project. It lets users ask questions about the files uploaded to the platform and get automatic summaries, using Retrieval-Augmented Generation (RAG). The ASP.NET Core backend calls this service over HTTP.
+
+## Credits and my work
+
+This service is based on the open-source **mini-rag** project by bakrianoo (Abu Bakr Soliman), published at https://github.com/bakrianoo/mini-rag under the Apache-2.0 license. I used it as a foundation, then adapted and extended it for EduPro.
+
+What I added or changed for EduPro:
+- Support for Word (.docx) and PowerPoint (.pptx) files in addition to PDF
+- Map-Reduce document summarization (chunks are summarized in batches, then merged into one final summary)
+- Automatic detection of the question language (Arabic or English) to select the matching prompt templates
+- Local LLM setup with Ollama (gemma2 for generation, nomic-embed-text for embeddings), hosted on Google Colab and exposed through ngrok
+- Integration with the ASP.NET Core backend ([EduPro-CleanArchitecture-API](https://github.com/taqwaghanem2004-del/EduPro-CleanArchitecture-API)), which uses the EduFile ID as the project ID and stores the generated summary
+
+The React frontend, built by teammates, talks only to the .NET backend.
+
+## Tech stack
+
+FastAPI, LangChain, Celery, RabbitMQ, Redis, PostgreSQL with PGVector, Ollama
+
+---
+
+# Original course README
+
+The text below is the README of the original mini-rag project.
+
 # mini-rag
 
 This is a minimal implementation of the RAG model for question answering.
